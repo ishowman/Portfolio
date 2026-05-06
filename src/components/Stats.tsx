@@ -166,7 +166,7 @@ const Stats = ({ year: initialYear = 2025 }: StatsProps) => {
                   `${formatActivityDate(activity.date)} • ${activity.count} contribution${activity.count === 1 ? "" : "s"}`,
                 },
               }}
-            />
+              />
             <div className="flex items-center justify-between text-[11px] text-muted-foreground">
               <span className="text-sm font-semibold">
                 {data.reduce((sum, activity) => sum + activity.count, 0)}{" "}
