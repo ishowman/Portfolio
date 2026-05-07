@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 
 const navItems = [
   { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog", isRoute: true },
+  { href: "/blog", label: "Blog" },
 ];
 
 const themes = [
@@ -27,13 +27,8 @@ const Navbar = () => {
         </Link>
 
         <div className="flex flex-1 items-center justify-end gap-0.5 pr-2 sm:gap-1 sm:pr-3">
-          {navItems.map(({ href, label, isRoute }) => {
-            const isActive = isRoute
-              ? location.pathname === href
-              : href === "#home"
-                ? location.pathname === "/" &&
-                  (!location.hash || location.hash === href)
-                : location.pathname === "/" && location.hash === href;
+          {navItems.map(({ href, label }) => {
+            const isActive = location.pathname.startsWith(href);
 
             const itemClass = `rounded-md px-2.5 py-1.5 text-xs font-light transition-colors sm:px-3 sm:py-2 sm:text-base ${
               isActive
@@ -41,14 +36,10 @@ const Navbar = () => {
                 : "text-muted-foreground hover:text-foreground"
             }`;
 
-            return isRoute ? (
+            return (
               <Link key={label} to={href} className={itemClass}>
                 {label}
               </Link>
-            ) : (
-              <a key={label} href={href} className={itemClass}>
-                {label}
-              </a>
             );
           })}
         </div>

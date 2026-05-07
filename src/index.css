@@ -165,6 +165,9 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+
+  --animate-marquee-left: marquee-left 20s linear infinite;
+  --animate-marquee-right: marquee-right 20s linear infinite;
 }
 
 @layer base {
@@ -245,4 +248,14 @@
     opacity: 0.9;
     transform: scale(1.05);
   }
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
 }

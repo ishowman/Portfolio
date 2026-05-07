@@ -35,7 +35,7 @@ const formatActivityDate = (date: string) => {
   return `${parsed.getDate()} ${monthNames[parsed.getMonth()]} ${parsed.getFullYear()}`;
 };
 
-const Stats = ({ year: initialYear = 2025 }: StatsProps) => {
+const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
   const { resolvedTheme } = useTheme();
   const [data, setData] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);

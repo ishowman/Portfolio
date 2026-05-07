@@ -1,5 +1,8 @@
 import ProjectCard from "./ProjectCard";
 import { projects } from "@/data/projects";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 
 const ProjectSection = () => {
   return (
@@ -12,6 +15,20 @@ const ProjectSection = () => {
         {projects.map((project) => (
           <ProjectCard key={project.name} {...project} />
         ))}
+      </div>
+      <div className="flex justify-center pt-6">
+        <Button
+          asChild
+          variant="outline"
+          size="lg"
+          className="bg-card border border-border border-dashed text-foreground text-base"
+        >
+          <Link to="/projects">
+            View all Projects
+            <ChevronRight />
+          </Link>
+        </Button>
+        
       </div>
     </section>
   );

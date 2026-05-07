@@ -77,18 +77,21 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-wrap gap-3 sm:gap-4">
-            <Button size="lg">
-              Get in Touch
-              <ChevronRight />
-            </Button>
+            <a href="/contact">
+              <Button size="lg">
+                Get in Touch
+                <ChevronRight />
+              </Button>
+            </a>
             <a
               href="https://drive.google.com/file/d/1AF0owusJPd1yf1vRwCJcaex04pnEVL_H/view?usp=sharing"
               target="_blank"
               rel="noreferrer"
             >
               <Button
+                variant="outline"
                 size="lg"
-                className="bg-card text-foreground border border-border border-dashed cursor-pointer"
+                className="bg-card text-foreground border-dashed cursor-pointer"
               >
                 Resume
                 <BookText />

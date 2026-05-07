@@ -7,8 +7,10 @@ import { ThemeProvider } from "./providers/theme-provider.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Blog from "./pages/Blog.tsx";
 import Projects from "./pages/Projects.tsx";
+import ProjectDetail from "./pages/ProjectDetail.tsx";
 import Contact from "./pages/Contact.tsx";
 import Navbar from "./components/Navbar.tsx";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -19,11 +21,13 @@ createRoot(document.getElementById("root")!).render(
       disableTransitionOnChange
     >
       <BrowserRouter>
-          <Navbar />
+        <ScrollToTop />
+        <Navbar />
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>

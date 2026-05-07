@@ -1,0 +1,93 @@
+import { Button } from "@/components/ui/button";
+import { projects } from "@/data/projects";
+import { ChevronLeft } from "lucide-react";
+import { LuGithub } from "react-icons/lu";
+import { BiLink } from "react-icons/bi";
+import TechIcon from "@/components/TechIcon";
+import { useNavigate, useParams } from "react-router-dom";
+const ProjectDetail = () => {
+  const navigate = useNavigate();
+  const { slug } = useParams();
+  const project = projects.find(
+    (p) => p.name.toLowerCase().replace(/\s+/g, "-") === slug
+  );
+
+  if (!project) {
+    return (
+      <div className="flex min-h-screen items-center justify-center text-2xl text-muted-foreground">
+        Project not found
+      </div>
+    );
+  }
+
+  return (
+    <main className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-24 space-y-6">
+      <button
+        onClick={() => navigate(-1)}
+        className="flex items-center gap-3 text-md font-semibold text-muted-foreground cursor-pointer hover:text-foreground duration-200"
+      >
+        <ChevronLeft size={20} strokeWidth={2.25} /> Back to Projects
+      </button>
+      <div className="flex flex-col gap-6">
+        <h1 className="text-5xl font-bold">{project.name}</h1>
+        <p className="font-light text-xl text-muted-foreground">
+          {project.description}
+        </p>
+        <div className="flex gap-4">
+          <a href={project.githubLink} target="_blank" rel="noreferrer">
+            <Button
+              size="lg"
+              className="bg-card font-light text-foreground border border-border border-dashed cursor-pointer h-12 px-4 text-base"
+            >
+              <LuGithub className="w-5 h-5" />
+              View Source
+            </Button>
+          </a>
+          <a href={project.liveLink} target="_blank" rel="noreferrer">
+            <Button
+              size="lg"
+              className="font-light border border-border border-dashed cursor-pointer h-12 px-4 text-base"
+            >
+              <BiLink className="w-5 h-5" />
+              Live Demo
+            </Button>
+          </a>
+        </div>
+        <img
+          className="rounded-lg border border-border border-dashed"
+          src={project.imgSrc}
+          alt={project.name}
+          loading="lazy"
+        />
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Technologies Used</h2>
+          <div className="flex flex-wrap items-center gap-2 mt-2">
+            {project.techStack.map((tech) => (
+              <span
+                key={tech.name}
+                className="bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-1 py-2 text-xs text-foreground sm:px-3.5 sm:text-base"
+              >
+                <TechIcon item={tech} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                {tech.name}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">About the Project</h2>
+          <p className="text-muted-foreground font-light">{project.about}</p>
+        </div>
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Key Features</h2>
+          <ul className="list-disc pl-5 space-y-2 text-muted-foreground font-light ">
+            {project.features.map((feature, idx) => (
+              <li key={idx}>{feature}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default ProjectDetail;
