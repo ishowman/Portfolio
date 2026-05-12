@@ -43,8 +43,9 @@ const ProjectDetail = () => {
           <div className="flex flex-wrap gap-3 sm:gap-4">
             <a href={project.githubLink} target="_blank" rel="noreferrer">
               <Button
-                size="sm"
-                className="bg-card font-light text-foreground border border-border border-dashed cursor-pointer h-9 px-3 text-sm sm:h-10 sm:px-4 transition-transform hover:scale-105 active:scale-95"
+              variant="outline"
+              className="border border-border border-dashed"
+                size="lg"
               >
                 <LuGithub className="w-4 h-4 mr-1.5" />
                 View Source
@@ -52,8 +53,7 @@ const ProjectDetail = () => {
             </a>
             <a href={project.liveLink} target="_blank" rel="noreferrer">
               <Button
-                size="sm"
-                className="font-light border border-border border-dashed cursor-pointer h-9 px-3 text-sm sm:h-10 sm:px-4 transition-transform hover:scale-105 active:scale-95"
+                size="lg"
               >
                 <BiLink className="w-4 h-4 mr-1.5" />
                 Live Demo
@@ -75,7 +75,7 @@ const ProjectDetail = () => {
             {project.techStack.map((tech) => (
               <span
                 key={tech.name}
-                className="bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-1 py-2 text-xs text-foreground sm:px-3.5 sm:text-base transition-colors hover:border-foreground/30"
+                className="bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-1 py-2 text-xs text-foreground sm:px-3.5 sm:text-sm"
               >
                 <TechIcon item={tech} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 {tech.name}

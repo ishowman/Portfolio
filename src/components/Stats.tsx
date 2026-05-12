@@ -59,6 +59,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
     const onWheel = (e: WheelEvent) => {
       if (e.deltaY !== 0) {
         e.preventDefault();
+        e.stopPropagation();
         el.scrollLeft += e.deltaY;
       }
     };
@@ -158,7 +159,8 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
           <div className="space-y-3">
             <div
               ref={scrollRef}
-              className="w-full overflow-x-auto pb-42[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              data-lenis-prevent="true"
+              className="w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             >
               <div className="min-w-max">
                 <ActivityCalendar
@@ -208,7 +210,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
               </div>
             </div>
             <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-              <span className="text-sm font-semibold">
+              <span className="text-xs font-semibold sm:text-sm">
                 {data.reduce((sum, activity) => sum + activity.count, 0)}{" "}
                 contributions{" "}
                 {year === currentYear ? "in the last year" : `in ${year}`}

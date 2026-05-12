@@ -56,9 +56,9 @@ const Navbar = () => {
                 <TabsTrigger
                   key={theme}
                   value={theme}
-                  className="h-6 w-6 sm:h-7 sm:w-7 rounded-full flex items-center justify-center bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
+                  className="h-6 w-6 sm:h-6 sm:w-6 rounded-full flex items-center justify-center bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
                 >
-                  <Icon className="size-3.5 sm:size-[18px]" />
+                  <Icon className="size-3.5 sm:size-[16px]" />
                 </TabsTrigger>
               ))}
             </TabsList>

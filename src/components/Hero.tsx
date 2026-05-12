@@ -20,7 +20,10 @@ const Hero = () => {
         animate="visible"
         className="space-y-5 sm:space-y-10"
       >
-        <motion.div variants={itemVariants} className="flex items-center mb-8 gap-[14px] sm:gap-[20px]">
+        <motion.div
+          variants={itemVariants}
+          className="flex items-center mb-8 gap-[14px] sm:gap-[20px]"
+        >
           <div>
             {/* avatar */}
             <img
@@ -49,7 +52,7 @@ const Hero = () => {
                     icon={icon}
                     darkIcon={darkIcon}
                     alt={name}
-                    className="h-6 w-6 rounded border border-border/70 p-0.5 sm:h-7 sm:w-7"
+                    className="h-6 w-6 rounded p-0.5 sm:h-6 sm:w-6"
                   />
                 </a>
               ))}
@@ -86,7 +89,7 @@ const Hero = () => {
 
           <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
             <a href="/contact">
-              <Button size="lg" className="transition-transform hover:scale-105 active:scale-95">
+              <Button size="lg">
                 Get in Touch
                 <ChevronRight className="ml-1" />
               </Button>
@@ -99,7 +102,7 @@ const Hero = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-card text-foreground border-dashed cursor-pointer transition-transform hover:scale-105 active:scale-95"
+                className="bg-card text-foreground border-dashed cursor-pointer"
               >
                 Resume
                 <BookText className="ml-2" />

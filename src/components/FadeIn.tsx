@@ -15,8 +15,6 @@ export function FadeIn({
   className,
   ...props
 }: FadeInProps) {
-  // We can merge custom props if needed, but for now we'll just use the standard fadeInUp variants
-  // and pass the delay via transition if a custom delay is provided.
   const customVariants = {
     ...fadeInUp,
     visible: {
