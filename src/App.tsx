@@ -6,6 +6,7 @@ import Stats from "./components/Stats";
 import { cn } from "@/lib/utils";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import BlogSection from "./components/BlogSection";
+import { FadeIn } from "./components/FadeIn";
 
 const App = () => {
   return (
@@ -22,13 +23,23 @@ const App = () => {
         />
       </div>
       <div className="relative z-10 flex flex-col flex-1">
-        <main className="mx-auto flex w-full max-w-3xl flex-col gap-20 px-6 pb-12 sm:gap-20 sm:pb-20">
+        <main className="mx-auto flex w-full max-w-3xl flex-col gap-20 px-6 pb-12 sm:gap-20 sm:pb-20 overflow-hidden">
           <Hero />
-          <SkillSection />
-          <ProjectSection />
-          <BlogSection />
-          <Stats />
-          <Footer />
+          <FadeIn delay={0.2}>
+            <SkillSection />
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <ProjectSection />
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <BlogSection />
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <Stats />
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <Footer />
+          </FadeIn>
         </main>
       </div>
     </div>

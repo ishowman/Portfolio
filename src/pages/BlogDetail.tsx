@@ -3,6 +3,7 @@ import { ChevronLeft, Clock, Tag } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { FadeIn } from "@/components/FadeIn";
 
 const BlogDetail = () => {
   const navigate = useNavigate();
@@ -21,64 +22,74 @@ const BlogDetail = () => {
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-24 space-y-6">
-      <button
-        onClick={() => navigate(-1)}
-        className="flex items-center gap-3 text-md font-semibold text-muted-foreground cursor-pointer hover:text-foreground duration-200"
-      >
-        <ChevronLeft size={20} strokeWidth={2.25} /> Back to Blogs
-      </button>
+      <FadeIn yOffset={10} duration={0.4}>
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-3 text-md font-semibold text-muted-foreground cursor-pointer hover:text-foreground duration-200 w-fit"
+        >
+          <ChevronLeft size={20} strokeWidth={2.25} /> Back to Blogs
+        </button>
+      </FadeIn>
 
       <div className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
-            {new Date(blog.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-          </span>
-          <span className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
-            <Clock size={12} />
-            {blog.readTime}
-          </span>
-        </div>
-
-        <h1 className="text-4xl font-bold leading-tight">{blog.title}</h1>
-        <p className="font-light text-xl text-muted-foreground">
-          {blog.description}
-        </p>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <Tag size={14} className="text-muted-foreground shrink-0" />
-          {blog.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-md border border-dashed border-border/70 bg-card px-2.5 py-0.5 font-mono text-xs text-muted-foreground"
-            >
-              {tag}
+        <FadeIn delay={0.1}>
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
+              {new Date(blog.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
             </span>
-          ))}
-        </div>
+            <span className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
+              <Clock size={12} />
+              {blog.readTime}
+            </span>
+          </div>
 
-        <hr className="border-dashed border-border/60" />
+          <h1 className="text-2xl sm:text-4xl font-bold leading-tight mt-4">{blog.title}</h1>
+          <p className="font-light text-xl text-muted-foreground mt-4">
+            {blog.description}
+          </p>
+        </FadeIn>
 
-        <article className="prose prose-neutral dark:prose-invert max-w-none">
-          <Markdown
-            remarkPlugins={[remarkGfm]}
-            components={{
-              img: ({ src, alt }) => (
-                <img
-                  src={src}
-                  alt={alt}
-                  loading="lazy"
-                  className="rounded-lg w-full"
-                />
-              ),
-            }}
-          >
-            {blog.content}
-          </Markdown>
-        </article>
+        <FadeIn delay={0.15}>
+          <div className="flex flex-wrap items-center gap-2">
+            <Tag size={14} className="text-muted-foreground shrink-0" />
+            {blog.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-md border border-dashed border-border/70 bg-card px-2.5 py-0.5 font-mono text-xs text-muted-foreground"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <hr className="border-dashed border-border/60" />
+        </FadeIn>
+
+        <FadeIn delay={0.25}>
+          <article className="prose prose-neutral dark:prose-invert max-w-none">
+            <Markdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                img: ({ src, alt }) => (
+                  <img
+                    src={src}
+                    alt={alt}
+                    loading="lazy"
+                    className="rounded-lg w-full"
+                  />
+                ),
+              }}
+            >
+              {blog.content}
+            </Markdown>
+          </article>
+        </FadeIn>
       </div>
     </main>
   );

@@ -4,20 +4,50 @@ import TechIcon from "./TechIcon";
 import { skills } from "@/data/tech";
 import { socials } from "@/data/socials";
 import SocialIcon from "./SocialIcon";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.4,
+      ease: [0.21, 0.47, 0.32, 0.98] as const,
+    },
+  },
+};
+
 const Hero = () => {
   return (
     <section
       className="flex flex-col justify-center pt-24 pb-8 sm:pt-32 sm:pb-12"
       id="home"
     >
-      <div className="space-y-5 sm:space-y-10">
-        <div className="flex items-center mb-8 gap-[14px] sm:gap-[20px]">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="space-y-5 sm:space-y-10"
+      >
+        <motion.div variants={itemVariants} className="flex items-center mb-8 gap-[14px] sm:gap-[20px]">
           <div>
             {/* avatar */}
             <img
               src="https://avatars.githubusercontent.com/u/198460996?v=4"
               alt="profile"
-              loading="lazy"
               className="h-28 w-28 rounded-full border-2 border-border p-1 shadow-sm sm:h-40 sm:w-40"
             />
           </div>
@@ -35,7 +65,7 @@ const Hero = () => {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="border-0"
+                  className="border-0 hover:opacity-80 transition-opacity"
                 >
                   <SocialIcon
                     icon={icon}
@@ -47,9 +77,9 @@ const Hero = () => {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="space-y-5 sm:space-y-6">
+        <motion.div variants={itemVariants} className="space-y-5 sm:space-y-6">
           <h1 className="text-3xl font-semibold sm:text-4xl">
             FullStack Developer -{" "}
             <span className="text-2xl text-muted-foreground sm:text-3xl">
@@ -62,7 +92,7 @@ const Hero = () => {
               {skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className="bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-2 py-1 text-xs text-foreground sm:px-2.5 sm:text-sm"
+                  className="bg-card ml-1 inline-flex items-center gap-1.5 rounded-md border border-dashed px-2 py-1 text-xs text-foreground sm:px-2.5 sm:text-sm transition-colors hover:border-foreground/30"
                 >
                   <TechIcon
                     item={skill}
@@ -76,11 +106,11 @@ const Hero = () => {
             blockchain out of curiosity.
           </p>
 
-          <div className="flex flex-wrap gap-3 sm:gap-4">
+          <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
             <a href="/contact">
-              <Button size="lg">
+              <Button size="lg" className="transition-transform hover:scale-105 active:scale-95">
                 Get in Touch
-                <ChevronRight />
+                <ChevronRight className="ml-1" />
               </Button>
             </a>
             <a
@@ -91,15 +121,15 @@ const Hero = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-card text-foreground border-dashed cursor-pointer"
+                className="bg-card text-foreground border-dashed cursor-pointer transition-transform hover:scale-105 active:scale-95"
               >
                 Resume
-                <BookText />
+                <BookText className="ml-2" />
               </Button>
             </a>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

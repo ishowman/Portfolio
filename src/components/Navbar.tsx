@@ -22,7 +22,7 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-dashed border-border/60 bg-background/85 backdrop-blur supports-backdrop-filter:bg-foregr/90">
       <div className="mx-auto flex h-16 w-full max-w-3xl items-center gap-4 px-6">
-        <Link to="/" className="shrink-0 text-xs font-light tracking-normal text-foreground sm:text-xl hover:opacity-80 transition-opacity">
+        <Link to="/" className="shrink-0 text-base font-light tracking-normal text-foreground sm:text-xl hover:opacity-80 transition-opacity">
           @charanmunur
         </Link>
 
@@ -30,7 +30,7 @@ const Navbar = () => {
           {navItems.map(({ href, label }) => {
             const isActive = location.pathname.startsWith(href);
 
-            const itemClass = `rounded-md px-2.5 py-1.5 text-xs font-light transition-colors sm:px-3 sm:py-2 sm:text-base ${
+            const itemClass = `rounded-md px-2.5 py-1.5 text-sm font-light transition-colors sm:px-3 sm:py-2 sm:text-base ${
               isActive
                 ? "!text-foreground"
                 : "text-muted-foreground hover:text-foreground"
@@ -51,14 +51,14 @@ const Navbar = () => {
             value={currentTheme}
             onValueChange={(v) => setTheme(v as "light" | "dark" | "system")}
           >
-            <TabsList className="flex rounded-full border border-dashed border-border/70 bg-muted/30 gap-1 p-1">
+            <TabsList className="flex rounded-full border border-dashed border-border/70 bg-muted/30 gap-0.5 p-0.5 sm:gap-1 sm:p-1">
               {themes.map(({ theme, icon: Icon }) => (
                 <TabsTrigger
                   key={theme}
                   value={theme}
-                  className="h-7 w-7 rounded-full flex items-center justify-center bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
+                  className="h-6 w-6 sm:h-7 sm:w-7 rounded-full flex items-center justify-center bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
                 >
-                  <Icon size={18} />
+                  <Icon className="size-3.5 sm:size-[18px]" />
                 </TabsTrigger>
               ))}
             </TabsList>
