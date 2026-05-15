@@ -13,8 +13,7 @@ const SkillSection = () => {
     <section id="skills" className="w-full space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-3xl font-bold">|</span>
-          <p className="text-3xl font-semibold">My Stack</p>
+          <p className="text-3xl font-semibold">Technologies</p>
         </div>
         <button
           onClick={() => setIsInline(!isInline)}

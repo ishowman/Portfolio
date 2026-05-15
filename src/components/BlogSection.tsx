@@ -8,7 +8,6 @@ const BlogSection = () => {
   return (
     <section id="blogs" className="w-full space-y-6">
       <div className="flex gap-3">
-        <span className="text-3xl font-bold">|</span>
         <p className="text-3xl font-semibold">Blogs</p>
       </div>
       <div className="flex flex-col gap-4">

@@ -1,7 +1,8 @@
-import { Moon, Sun, TvMinimal } from "lucide-react";
+import { Menu, Moon, Sun, TvMinimal, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
 import { useTheme } from "next-themes";
+import { useState } from "react";
 
 const navItems = [
   { href: "/projects", label: "Projects" },
@@ -18,19 +19,25 @@ const Navbar = () => {
   const location = useLocation();
   const { theme, setTheme } = useTheme();
   const currentTheme = theme ?? "system";
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-dashed border-border/60 bg-background/85 backdrop-blur supports-backdrop-filter:bg-foregr/90">
-      <div className="mx-auto flex h-16 w-full max-w-3xl items-center gap-4 px-6">
-        <Link to="/" className="shrink-0 text-base font-light tracking-normal text-foreground sm:text-xl hover:opacity-80 transition-opacity">
+      <div className="mx-auto flex h-16 w-full max-w-3xl items-center justify-between gap-4 px-4 sm:px-6">
+        <Link
+          to="/"
+          onClick={() => setIsOpen(false)}
+          className="shrink-0 text-base font-light tracking-normal text-foreground sm:text-xl hover:opacity-80 transition-opacity"
+        >
           @charanmunur
         </Link>
 
-        <div className="flex flex-1 items-center justify-end gap-0.5 pr-2 sm:gap-1 sm:pr-3">
+        {/* Desktop Nav */}
+        <div className="hidden sm:flex flex-1 items-center justify-end gap-1 pr-3">
           {navItems.map(({ href, label }) => {
             const isActive = location.pathname.startsWith(href);
 
-            const itemClass = `rounded-md px-2.5 py-1.5 text-sm font-light transition-colors sm:px-3 sm:py-2 sm:text-base ${
+            const itemClass = `rounded-md px-3 py-2 text-base font-light transition-colors ${
               isActive
                 ? "!text-foreground"
                 : "text-muted-foreground hover:text-foreground"
@@ -44,27 +51,89 @@ const Navbar = () => {
           })}
         </div>
 
-        <div className="h-6 w-px shrink-0 bg-border/80" aria-hidden="true" />
+        <div
+          className="hidden sm:block h-6 w-px shrink-0 bg-border/80 mx-2"
+          aria-hidden="true"
+        />
 
-        <div className="flex shrink-0 items-center">
+        <div className="hidden sm:flex shrink-0 items-center">
           <Tabs
             value={currentTheme}
             onValueChange={(v) => setTheme(v as "light" | "dark" | "system")}
           >
-            <TabsList className="flex rounded-full border border-dashed border-border/70 bg-muted/30 gap-0.5 p-0.5 sm:gap-1 sm:p-1">
+            <TabsList className="flex rounded-full border border-dashed border-border/70 bg-muted/30 gap-1 p-1">
               {themes.map(({ theme, icon: Icon }) => (
                 <TabsTrigger
                   key={theme}
                   value={theme}
-                  className="h-6 w-6 sm:h-6 sm:w-6 rounded-full flex items-center justify-center bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
+                  className="h-6 w-6 rounded-full flex items-center justify-center bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
                 >
-                  <Icon className="size-3.5 sm:size-[16px]" />
+                  <Icon className="size-[16px]" />
                 </TabsTrigger>
               ))}
             </TabsList>
           </Tabs>
         </div>
+
+        {/* Mobile Toggle Button */}
+        <button
+          className="flex sm:hidden items-center justify-center p-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted/50"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle Menu"
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="sm:hidden absolute top-16 left-0 w-full border-b border-dashed border-border/60 bg-background/95 backdrop-blur-md px-4 py-4 flex flex-col gap-4 shadow-sm">
+          <div className="flex flex-col gap-1">
+            {navItems.map(({ href, label }) => {
+              const isActive = location.pathname.startsWith(href);
+              const itemClass = `rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
+                isActive
+                  ? "bg-accent/60 text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent/30"
+              }`;
+              return (
+                <Link
+                  key={label}
+                  to={href}
+                  onClick={() => setIsOpen(false)}
+                  className={itemClass}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="h-px w-full bg-border/80" aria-hidden="true" />
+
+          <div className="flex items-center justify-between px-1">
+            <span className="text-sm font-medium text-muted-foreground">
+              Theme
+            </span>
+            <Tabs
+              value={currentTheme}
+              onValueChange={(v) => setTheme(v as "light" | "dark" | "system")}
+            >
+              <TabsList className="flex rounded-full border border-dashed border-border/70 bg-muted/30 gap-1 p-1">
+                {themes.map(({ theme, icon: Icon }) => (
+                  <TabsTrigger
+                    key={theme}
+                    value={theme}
+                    className="h-6 w-6 rounded-full flex items-center justify-center bg-transparent text-muted-foreground transition-colors hover:text-foreground data-[state=active]:bg-background data-[state=active]:text-foreground! data-[state=active]:shadow-sm"
+                  >
+                    <Icon className="size-[16px]" />
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

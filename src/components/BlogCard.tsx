@@ -4,37 +4,37 @@ import { Link } from "react-router-dom";
 
 const BlogCard = ({ title, description, tags, date, readTime }: Blog) => {
   return (
-    <div className="flex flex-col gap-2 bg-card border border-dashed border-border/80 p-5 rounded-xl w-full overflow-hidden">
+    <div className="flex flex-col gap-3 bg-card border border-dashed border-border/80 p-4 sm:p-5 rounded-xl w-full overflow-hidden transition-colors hover:border-foreground/30">
       <div className="flex items-center justify-between">
-        <div className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
+        <div className="font-mono text-[10px] sm:text-xs tracking-widest text-muted-foreground uppercase">
           {new Date(date).toLocaleDateString("en-US", {
             year: "numeric",
             month: "short",
             day: "numeric",
           })}
         </div>
-        <div className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
-          <Clock size={12} />
+        <div className="flex items-center gap-1.5 font-mono text-[10px] sm:text-xs text-muted-foreground">
+          <Clock size={12} className="sm:size-[14px]" />
           {readTime}
         </div>
       </div>
       <Link
         to={`/blogs/${title.toLowerCase().replace(/\s+/g, "-")}`}
-        className="flex flex-row items-center justify-between w-full group"
+        className="flex flex-row items-start justify-between w-full group gap-3 sm:gap-4 mt-1"
       >
-        <span className="text-xl font-semibold text-foreground group-hover:underline decoration-1 underline-offset-4 transition-all duration-200">
+        <span className="text-lg sm:text-xl font-semibold text-foreground group-hover:underline decoration-1 underline-offset-4 transition-all duration-200 line-clamp-2">
           {title}
         </span>
-        <ArrowUpRight className="w-5 h-5 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
+        <ArrowUpRight className="w-5 h-5 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors mt-0.5" />
       </Link>
-      <p className="text-sm font-light leading-6 text-muted-foreground">
+      <p className="text-sm font-light leading-relaxed text-muted-foreground line-clamp-2 sm:line-clamp-3">
         {description}
       </p>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 mt-1">
         {tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-md border border-dashed border-border/70 bg-background px-2 py-0.5 font-mono text-xs text-muted-foreground"
+            className="rounded-md border border-dashed border-border/70 bg-background px-2 py-0.5 font-mono text-[10px] sm:text-xs text-muted-foreground"
           >
             {tag}
           </span>
