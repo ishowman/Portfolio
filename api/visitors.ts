@@ -11,15 +11,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "POST") {
     try {
       if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
-        return res
-          .status(500)
-          .json({ error: "Server is missing Supabase configuration" });
+        console.error("visitors api error: missing Supabase configuration");
+        return res.status(200).json({ count: null });
       }
 
       const { visitor_id } = req.body;
 
       if (!visitor_id) {
-        return res.status(400).json({ error: "visitor_id required" });
+        return res.status(200).json({ count: null });
       }
 
       const authHeaders = {
@@ -38,11 +37,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
 
       if (!insertRes.ok && insertRes.status !== 409) {
-        const body = await insertRes.text();
-        return res.status(500).json({
-          error: "Failed to record visitor",
-          details: body,
-        });
+        console.error(
+          "visitors api error: failed to record visitor",
+          await insertRes.text(),
+        );
       }
 
       const countRes = await fetch(
@@ -56,11 +54,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       );
 
       if (!countRes.ok) {
-        const body = await countRes.text();
-        return res.status(500).json({
-          error: "Failed to read visitor count",
-          details: body,
-        });
+        console.error(
+          "visitors api error: failed to read visitor count",
+          await countRes.text(),
+        );
+        return res.status(200).json({ count: null });
       }
 
       const countHeader = countRes.headers.get("content-range");
@@ -69,7 +67,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(200).json({ count });
     } catch (error) {
       console.error("visitors api error:", error);
-      return res.status(500).json({ error: "Unexpected server error" });
+      return res.status(200).json({ count: null });
     }
   }
   return res.status(405).json({ error: "Method not allowed" });

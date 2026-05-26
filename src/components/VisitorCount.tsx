@@ -1,11 +1,15 @@
 import { getOrCreateFingerprint } from "@/lib/fingerprint";
 import { UserRound } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Skeleton } from "./ui/skeleton";
 
 const VisitorCount = () => {
   const [count, setCount] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let active = true;
+
     const track = async () => {
       const visitor_id = getOrCreateFingerprint();
 
@@ -21,15 +25,23 @@ const VisitorCount = () => {
         }
 
         const data = (await res.json()) as { count?: number };
-        if (typeof data.count === "number") {
+        if (active && typeof data.count === "number") {
           setCount(data.count);
         }
       } catch {
         // Keep the footer quiet if the API is unavailable.
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
       }
     };
 
     track();
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   const getOrdinal = (n: number) => {
@@ -48,9 +60,21 @@ const VisitorCount = () => {
   };
 
   return (
-    <div className="flex-row items-center justify-center rounded-lg">
-      {count === null ? (
-        <p className="text-muted-foreground text-sm">counting visitors...</p>
+    <div className="flex items-center justify-center rounded-lg">
+      {loading ? (
+        <div className="flex items-center gap-2" aria-busy="true">
+          <Skeleton className="size-4 rounded-full" />
+          <div className="space-y-1">
+            <Skeleton className="h-3 w-28" />
+            <Skeleton className="h-3 w-20" />
+          </div>
+        </div>
+      ) : count === null ? (
+        <p className="text-sm text-muted-foreground">
+          <span className="inline-block align-middle tracking-[0.35em]">
+            ...
+          </span>
+        </p>
       ) : (
         <div className="flex items-center gap-2">
           <UserRound size={18} className="text-muted-foreground" />
