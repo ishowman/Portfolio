@@ -16,7 +16,7 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-        <div className="flex min-h-screen items-center justify-center text-xl text-muted-foreground">
+      <div className="flex min-h-screen items-center justify-center text-xl text-muted-foreground">
         Project not found
       </div>
     );
@@ -27,7 +27,7 @@ const ProjectDetail = () => {
       <FadeIn yOffset={10} duration={0.4}>
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-3 text-md font-semibold text-muted-foreground cursor-pointer hover:text-foreground duration-200 w-fit"
+          className="flex w-fit items-center gap-3 text-md font-light tracking-tight text-muted-foreground cursor-pointer duration-200 hover:text-foreground"
         >
           <ChevronLeft size={20} strokeWidth={2.25} /> Back to Projects
         </button>

@@ -78,12 +78,12 @@ export const MusicPlayer = () => {
         {/* Middle: Info */}
         <div className="flex flex-col min-w-[130px] justify-center">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold tracking-tight text-foreground truncate">
+            <span className="text-sm font-light tracking-tight text-foreground truncate">
               Aruarian Dance
             </span>
             {isPlaying && <MusicBars />}
           </div>
-          <span className="text-[11px] text-muted-foreground font-medium uppercase tracking-wider">
+          <span className="text-[11px] text-muted-foreground font-light uppercase tracking-wider">
             Nujabes
           </span>
         </div>

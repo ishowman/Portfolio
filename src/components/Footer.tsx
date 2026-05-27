@@ -6,7 +6,9 @@ const Footer = () => {
       <footer className="flex flex-col items-center gap-4 border-t border-dashed border-border/80 pt-8 text-sm sm:flex-row sm:items-end sm:justify-between sm:gap-6">
         <p className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
           <span className="text-muted-foreground">Designed & Developed by</span>
-          <span className="font-medium text-foreground">Charan Munur</span>
+          <span className="font-light tracking-tight text-foreground">
+            Charan Munur
+          </span>
         </p>
         <div className="sm:shrink-0">
           <VisitorCount />

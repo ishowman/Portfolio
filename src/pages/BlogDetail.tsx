@@ -14,7 +14,7 @@ const BlogDetail = () => {
 
   if (!blog) {
     return (
-        <div className="flex min-h-screen items-center justify-center text-xl text-muted-foreground">
+      <div className="flex min-h-screen items-center justify-center text-xl text-muted-foreground">
         Blog not found
       </div>
     );
@@ -25,7 +25,7 @@ const BlogDetail = () => {
       <FadeIn yOffset={10} duration={0.4}>
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-3 text-md font-semibold text-muted-foreground cursor-pointer hover:text-foreground duration-200 w-fit"
+          className="flex w-fit items-center gap-3 text-md font-light tracking-tight text-muted-foreground cursor-pointer duration-200 hover:text-foreground"
         >
           <ChevronLeft size={20} strokeWidth={2.25} /> Back to Blogs
         </button>
@@ -74,7 +74,21 @@ const BlogDetail = () => {
         </FadeIn>
 
         <FadeIn delay={0.25}>
-          <article className="prose prose-neutral dark:prose-invert max-w-none">
+          <article
+            className="
+              prose prose-neutral dark:prose-invert max-w-none
+              prose-headings:font-light prose-headings:tracking-tight
+              prose-h1:text-2xl prose-h1:sm:text-3xl
+              prose-h2:text-xl prose-h2:sm:text-2xl
+              prose-h3:text-lg prose-h3:sm:text-xl
+              prose-h4:text-base prose-h4:sm:text-lg
+              prose-h5:text-sm prose-h6:text-sm
+              prose-p:font-light prose-p:text-muted-foreground
+              prose-strong:font-medium prose-strong:text-foreground
+              prose-a:font-normal prose-a:text-foreground prose-a:no-underline hover:prose-a:underline
+              prose-li:font-light prose-blockquote:font-light
+            "
+          >
             <Markdown
               remarkPlugins={[remarkGfm]}
               components={{

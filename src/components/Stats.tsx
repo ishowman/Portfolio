@@ -211,7 +211,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
               </div>
             </div>
             <div className="flex items-center justify-between text-[11px] text-muted-foreground">
-              <span className="text-xs font-semibold sm:text-sm">
+              <span className="text-xs font-light sm:text-sm">
                 {data.reduce((sum, activity) => sum + activity.count, 0)}{" "}
                 contributions{" "}
                 {year === currentYear ? "in the last year" : `in ${year}`}

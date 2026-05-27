@@ -12,7 +12,6 @@ const Hero = () => {
   return (
     <section
       className="flex flex-col justify-center pt-32 pb-20 sm:pt-22 sm:pb-12"
- 
       id="home"
     >
       <motion.div
@@ -34,7 +33,7 @@ const Hero = () => {
             />
           </div>
           <div className="flex h-full flex-col justify-center gap-1 sm:gap-2">
-            <h1 className="flex items-center gap-1 text-right text-2xl font-medium tracking-tight sm:text-2xl md:text-2xl">
+            <h1 className="flex items-center gap-1 text-right text-2xl font-light tracking-tight sm:text-2xl md:text-3xl">
               Charan Munur
               <span className="text-background">
                 <BadgeCheck color="currentColor" fill="#3b82f6" size={28} />
@@ -65,10 +64,10 @@ const Hero = () => {
           <h1 className="max-w-full text-[1.7rem] font-normal tracking-tight leading-tight sm:text-[2.05rem] md:text-[2.15rem]">
             FullStack Developer -{" "}
             <span className="text-[0.95em] font-light text-muted-foreground sm:text-[0.96em]">
-              Learning Systems Shipping Clean Interfaces.
+              Learning Systems, Shipping Clean Interfaces.
             </span>
           </h1>
-          <p className="text-sm font-light leading-7 text-muted-foreground sm:text-base sm:leading-8">
+          <p className="text-base font-light leading-7 text-muted-foreground sm:text-lg sm:leading-8">
             I build backend systems and clean interfaces with{" "}
             <span className="inline items-center gap-2 align-middle">
               {skills.map((skill) => (
@@ -90,9 +89,12 @@ const Hero = () => {
 
           <div className="flex flex-wrap gap-3 sm:gap-4 pt-2">
             <a href="/contact">
-              <Button size="lg">
+              <Button
+                size="lg"
+                className="px-4"
+              >
                 Get in Touch
-                <ChevronRight className="ml-1" />
+                <ChevronRight strokeWidth={2.25} />
               </Button>
             </a>
             <a
@@ -103,10 +105,10 @@ const Hero = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-card text-foreground border-dashed cursor-pointer"
+                className="bg-card text-foreground border-dashed cursor-pointer px-4"
               >
                 Resume
-                <BookText className="ml-2" />
+                <BookText />
               </Button>
             </a>
           </div>

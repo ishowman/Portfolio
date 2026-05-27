@@ -84,13 +84,13 @@ const VisitorCount = () => {
           <UserRound size={17} className="shrink-0 text-muted-foreground" />
           <p className="flex min-w-0 flex-wrap items-center justify-center gap-x-1 gap-y-0.5 text-center text-sm leading-tight text-muted-foreground sm:justify-start sm:text-left">
             <span>You are</span>
-            <span className="whitespace-nowrap text-lg font-semibold leading-none text-foreground tabular-nums sm:text-xl">
+            <span className="whitespace-nowrap text-lg font-light leading-none text-foreground tabular-nums sm:text-xl">
               {count}
-              <sup className="ml-0.5 align-super text-[0.6em] font-medium">
+              <sup className="ml-0.5 align-super text-[0.6em] font-light">
                 {getOrdinal(count)}
               </sup>
             </span>
-            <span className="whitespace-nowrap text-sm font-medium leading-none text-muted-foreground tabular-nums sm:text-base">
+            <span className="whitespace-nowrap text-sm font-light leading-none text-muted-foreground tabular-nums sm:text-base">
               {total !== null ? `/ ${total}` : ""}
             </span>
             <span className="whitespace-nowrap">visitors</span>

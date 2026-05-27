@@ -12,7 +12,7 @@ const Blog = () => {
       <FadeIn yOffset={10} duration={0.4}>
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center w-fit gap-3 text-md font-semibold text-muted-foreground cursor-pointer hover:text-foreground duration-200"
+          className="flex w-fit items-center gap-3 text-md font-light tracking-tight text-muted-foreground cursor-pointer duration-200 hover:text-foreground"
         >
           <ChevronLeft size={20} strokeWidth={2.25} /> Back to Home
         </button>

@@ -13,7 +13,7 @@ const Contact = () => {
       <FadeIn yOffset={10} duration={0.4}>
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-3 text-md font-semibold text-muted-foreground cursor-pointer hover:text-foreground duration-200 w-fit"
+          className="flex w-fit items-center gap-3 text-md font-light tracking-tight text-muted-foreground cursor-pointer duration-200 hover:text-foreground"
         >
           <ChevronLeft size={20} strokeWidth={2.25} /> Back to Home
         </button>
@@ -58,7 +58,9 @@ const Contact = () => {
                     alt={social.name}
                     className="h-6 w-6 rounded-sm object-contain"
                   />
-                  <span className="text-base font-medium">{social.name}</span>
+                  <span className="text-base font-light tracking-tight">
+                    {social.name}
+                  </span>
                 </div>
                 <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-foreground" />
               </a>
