@@ -119,7 +119,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
   return (
     <section id="stats" className="w-full space-y-3">
       <div className="flex flex-col gap-3 pb-3 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex flex-col gap-1 mb-2">
+        <div className="flex flex-col gap-1">
           <div className="flex items-center gap-3">
             <p className="text-2xl font-light tracking-tight sm:text-3xl">
               GitHub Activity

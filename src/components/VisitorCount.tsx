@@ -82,7 +82,7 @@ const VisitorCount = () => {
       ) : (
         <div className="flex w-full items-center justify-center gap-2 sm:justify-start">
           <UserRound size={17} className="shrink-0 text-muted-foreground" />
-          <p className="flex min-w-0 flex-wrap items-center justify-center gap-x-1 gap-y-0.5 text-center text-sm leading-tight text-muted-foreground sm:justify-start sm:text-left">
+          <p className="flex min-w-0 flex-wrap items-center justify-center gap-x-1 gap-y-0.5 text-center text-base leading-tight text-muted-foreground sm:justify-start sm:text-left">
             <span>You are</span>
             <span className="whitespace-nowrap text-lg font-light leading-none text-foreground tabular-nums sm:text-xl">
               {count}
@@ -93,7 +93,7 @@ const VisitorCount = () => {
             <span className="whitespace-nowrap text-sm font-light leading-none text-muted-foreground tabular-nums sm:text-base">
               {total !== null ? `/ ${total}` : ""}
             </span>
-            <span className="whitespace-nowrap">visitors</span>
+            <span className="whitespace-nowrap text-base">visitors</span>
           </p>
         </div>
       )}
