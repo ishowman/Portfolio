@@ -24,22 +24,22 @@ const Hero = () => {
           variants={itemVariants}
           className="flex items-center mb-8 gap-[14px] sm:gap-[20px]"
         >
-          <div>
+          <div className="flex shrink-0 items-center justify-center">
             {/* avatar */}
             <img
-              src="https://avatars.githubusercontent.com/u/198460996?v=4"
+              src="/public/assets/musashi.svg"
               alt="profile"
-              className="h-35 w-35 rounded-full border-2 border-border p-1 shadow-sm sm:h-40 sm:w-40"
+              className="block h-35 w-35 shrink-0 rounded-full border-2 border-border object-cover object-center p-1 shadow-sm sm:h-40 sm:w-40"
             />
           </div>
-          <div className="flex h-full flex-col justify-center gap-1 sm:gap-2">
+          <div className="flex h-full flex-col justify-center gap-2 sm:gap-3">
             <h1 className="flex items-center gap-1 text-right text-2xl font-light tracking-tight sm:text-2xl md:text-3xl">
               Charan Munur
               <span className="text-background">
                 <BadgeCheck color="currentColor" fill="#3b82f6" size={28} />
               </span>
             </h1>
-            <div className="flex items-start gap-2 sm:gap-3">
+            <div className="flex items-start gap-2.5 sm:gap-3">
               {socials.map(({ name, icon, darkIcon, href }) => (
                 <a
                   key={name}
@@ -52,7 +52,7 @@ const Hero = () => {
                     icon={icon}
                     darkIcon={darkIcon}
                     alt={name}
-                    className="h-6 w-6 rounded p-0.5 sm:h-6 sm:w-6"
+                    className="h-6 w-6 rounded p-0.5 sm:h-7 sm:w-7"
                   />
                 </a>
               ))}
