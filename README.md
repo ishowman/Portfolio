@@ -1,39 +1,108 @@
-# Personal Portfolio
+# Portfolio
 
-A clean, responsive, and highly interactive personal developer portfolio built to showcase projects, skills, and write-ups.
+A personal portfolio built with React and Vite that showcases projects, blogs, skills, GitHub activity, and a small visitor counter in the footer.
 
-## Tech Stack
+## Stack
 
-- **Framework:** React + Vite
-- **Styling:** Tailwind CSS
-- **Components:** shadcn/ui
-- **Icons:** Lucide React & React Icons
-- **Routing:** React Router v6
-- **Animations:** Framer Motion
+- React 19
+- Vite
+- TypeScript
+- Tailwind CSS v4
+- shadcn/ui
+- Framer Motion
+- React Router
+- next-themes
+- Vercel serverless functions
+- Supabase for visitor storage
 
-## Features
+## What It Includes
 
-- **Modern UI:** Clean, minimalist design with a focus on typography, spacing, and subtle border-dashed aesthetics.
-- **Dynamic Project Routing:** Individual detail pages for each project (`/projects/:slug`) containing deep-dives, tech stacks, and features.
-- **Dark/Light Mode:** Seamless theme switching utilizing Tailwind and CSS variables.
-- **Responsive:** Fully optimized for mobile, tablet, and desktop viewports.
-- **Centralized Data:** Easily update the portfolio by editing `projects.ts`, `tech.ts`, and `socials.ts`.
+- Home page with hero, skills, featured projects, featured blogs, GitHub activity, and a quote section
+- Dedicated pages for `projects`, `blogs`, and `contact`
+- Detail routes for individual projects and blog posts
+- Theme switching with system, light, and dark support
+- Smooth scrolling and motion-driven section reveals
+- Footer visitor tracking with a locally generated fingerprint
+
+## Routes
+
+- `/` home
+- `/projects` all projects
+- `/projects/:slug` project detail
+- `/blogs` all blogs
+- `/blogs/:slug` blog detail
+- `/contact` contact page
+
+## Visitor Tracking
+
+The footer visitor counter is handled in two parts:
+
+- The client creates a local fingerprint in `src/lib/fingerprint.ts`.
+- That fingerprint is sent to the serverless endpoint at `api/visitors.ts`.
+
+### User-Agent Tracking
+
+The **user-agent is explicitly part of the fingerprint input**. It is read from `navigator.userAgent`, combined with other browser/device signals, hashed locally, and stored in `localStorage` under `visitor_id`.
+
+The fingerprint inputs are:
+
+- `navigator.userAgent`
+- `navigator.language`
+- `screen.width x screen.height`
+- browser timezone from `Intl.DateTimeFormat().resolvedOptions().timeZone`
+- `navigator.hardwareConcurrency`
+- `navigator.deviceMemory` when available
+- a canvas-based hash generated in the browser
+
+Important behavior:
+
+- If `localStorage.visitor_id` already exists, the app reuses it.
+- The raw fingerprint inputs are not sent to the API.
+- Only the hashed `visitor_id` is posted to `/api/visitors`.
+
+### Backend Behavior
+
+The visitor API:
+
+- accepts `POST` requests with `{ visitor_id }`
+- inserts the visitor into Supabase with duplicate protection
+- reads the total visitor count from Supabase
+- returns the visitor’s ordinal position plus the total count
+
+If Supabase env vars are missing or the API fails, the UI falls back gracefully and keeps the footer quiet.
 
 ## Local Development
 
-1. Clone the repository
-2. Install dependencies (the project uses `bun`, but `npm` or `yarn` work too):
+1. Install dependencies:
    ```bash
    bun install
    ```
-3. Start the development server:
+2. Start the dev server:
    ```bash
    bun run dev
    ```
+3. Build for production:
+   ```bash
+   bun run build
+   ```
+
+## Environment Variables
+
+The visitor endpoint expects:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
 
 ## Project Structure
 
-- `src/components/`: Reusable UI components (Hero, ProjectCard, Navbar) and base `shadcn/ui` elements.
-- `src/pages/`: Top-level route components (Home, Projects, ProjectDetail, Blog, Contact).
-- `src/data/`: Centralized data definitions for your portfolio content.
-- `src/providers/`: Context providers (e.g., ThemeProvider for dark mode).
+- `src/components/` reusable UI and section components
+- `src/pages/` route-level pages
+- `src/data/` portfolio content for projects, blogs, socials, and tech
+- `src/lib/` shared utilities including fingerprint generation
+- `api/` Vercel serverless endpoints
+- `public/` static assets
+
+## Notes
+
+- The app currently uses Vite rewrites so `/api/*` goes to the serverless handler and all other routes fall back to `index.html`.
+- Most of the main page content is data-driven, so updating `src/data/*` changes the public portfolio content without touching layout code.
