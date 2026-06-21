@@ -3,7 +3,7 @@ function djb2Hash(str: string): string {
   for (let i = 0; i < str.length; i++) {
     hash = (hash * 33) ^ str.charCodeAt(i);
   }
-  return (hash >>> 0).toString(16);
+  return (hash >>> 0).toString(16).padStart(8, "0");
 }
 
 function getCanvasHash(): string {
