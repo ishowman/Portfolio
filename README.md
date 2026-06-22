@@ -116,3 +116,4 @@ The visitor endpoint expects:
 
 - The app currently uses Vite rewrites so `/api/*` goes to the serverless handler and all other routes fall back to `index.html`.
 - Most of the main page content is data-driven, so updating `src/data/*` changes the public portfolio content without touching layout code.
+
