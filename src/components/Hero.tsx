@@ -34,10 +34,10 @@ const Hero = () => {
             />
           </div>
           <div className="flex h-full flex-col justify-center gap-2 sm:gap-3">
-            <h1 className="flex items-center gap-1 text-right text-2xl font-light tracking-tight sm:text-2xl md:text-3xl">
+            <h1 className="flex items-center gap-2 text-2xl font-normal tracking-tight text-foreground sm:text-2xl md:text-3xl">
               Charan Munur
-              <span className="text-background">
-                <BadgeCheck color="currentColor" fill="#3b82f6" size={28} />
+              <span className="text-background shrink-0">
+                <BadgeCheck color="currentColor" fill="#3b82f6" size={24} />
               </span>
             </h1>
             <div className="flex items-start gap-2.5 sm:gap-3">
