@@ -1,5 +1,6 @@
 import ProjectCard from "@/components/ProjectCard";
 import ComingSoonCard from "@/components/ComingSoonCard";
+import ComingSoonCardWide from "@/components/ComingSoonCardWide";
 import { projects } from "@/data/projects";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
@@ -7,6 +8,7 @@ import { FadeIn } from "@/components/helpers/FadeIn";
 
 const Projects = () => {
   const navigate = useNavigate();
+  const isEven = projects.length % 2 === 0;
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-col px-6 pt-6 pb-8 sm:pt-12 sm:pb-12 space-y-6">
@@ -38,9 +40,15 @@ const Projects = () => {
             <ProjectCard {...project} />
           </FadeIn>
         ))}
-        <FadeIn delay={0.15 + projects.length * 0.05} yOffset={20}>
-          <ComingSoonCard />
-        </FadeIn>
+        {isEven ? (
+          <FadeIn delay={0.15 + projects.length * 0.05} yOffset={20} className="col-span-1 sm:col-span-2">
+            <ComingSoonCardWide />
+          </FadeIn>
+        ) : (
+          <FadeIn delay={0.15 + projects.length * 0.05} yOffset={20}>
+            <ComingSoonCard />
+          </FadeIn>
+        )}
       </div>
     </main>
   );
