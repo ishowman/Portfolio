@@ -13,7 +13,7 @@ export const blogs: Blog[] = [
     description:
       "I started programming a month before my B.Tech even began. This is the story of every assumption I made, and every time I proved myself wrong.",
     tags: ["Journey", "Programming", "Reflection"],
-    date: "2025-05-10",
+    date: "2026-05-10",
     readTime: "10 min read",
     content: `I started programming a month before my B.Tech even began.
 
