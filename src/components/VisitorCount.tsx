@@ -1,4 +1,4 @@
-import { getOrCreateFingerprint } from "@/lib/fingerprint";
+import { getFingerprint, markVisited } from "@/lib/fingerprint";
 import { UserRound } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
@@ -6,13 +6,20 @@ import { Skeleton } from "./ui/skeleton";
 const VisitorCount = () => {
   const [count, setCount] = useState<number | null>(null);
   const [total, setTotal] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [shouldTrack] = useState(
+    () => localStorage.getItem("visited") !== "true",
+  );
+  const [loading, setLoading] = useState(shouldTrack);
 
   useEffect(() => {
     let active = true;
 
+    if (!shouldTrack) {
+      return;
+    }
+
     const track = async () => {
-      const visitor_id = getOrCreateFingerprint();
+      const visitor_id = getFingerprint();
 
       try {
         const res = await fetch("/api/visitors", {
@@ -24,6 +31,8 @@ const VisitorCount = () => {
         if (!res.ok) {
           return;
         }
+
+        markVisited();
 
         const data = (await res.json()) as { count?: number; total?: number };
         if (active && typeof data.count === "number") {
@@ -46,7 +55,7 @@ const VisitorCount = () => {
     return () => {
       active = false;
     };
-  }, []);
+  }, [shouldTrack]);
 
   const getOrdinal = (n: number) => {
     const v = n % 100;

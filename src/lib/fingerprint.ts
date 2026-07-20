@@ -37,11 +37,29 @@ export function generateFingerprint(): string {
   return djb2Hash(components);
 }
 
-export function getOrCreateFingerprint(): string {
-  const key = "visitor_id";
-  const existing = localStorage.getItem(key);
-  if (existing) return existing;
-  const hash = generateFingerprint();
-  localStorage.setItem(key, hash);
-  return hash;
+
+export function createFingerprint(): string {
+  const visitorId = generateFingerprint();
+  localStorage.setItem("visitor_id", visitorId);
+
+  return visitorId;
+}
+
+export function getFingerprint(): string {
+  const visitorId = localStorage.getItem("visitor_id");
+  const visited = localStorage.getItem("visited");
+
+  if (visited === "true" && visitorId ) {
+    return visitorId;
+  }
+
+  if (visitorId) {
+    return visitorId;
+  }
+
+  return createFingerprint();
+}
+
+export function markVisited(): void {
+  localStorage.setItem("visited", "true");
 }
